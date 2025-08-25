@@ -30,7 +30,7 @@ RUN groupadd -r app && useradd -r -d /app -g app app
 COPY pyproject.toml uv.lock ./
 
 # Install dependencies first (better layer caching)
-RUN --mount=type=cache,target=/root/.cache/uv \
+RUN --mount=type=cache,id=uv-cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
 # Copy application code
